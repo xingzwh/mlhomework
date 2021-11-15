@@ -3,6 +3,8 @@ from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+
+#处理数据
 data=np.loadtxt("D:\workspace\上课\机器学习\insurance.csv",delimiter=',',dtype=str,skiprows=1)
 print(data)
 data[data == 'male'] = 1
@@ -20,6 +22,8 @@ X=data[:,:8]
 print(X)
 Y=data[:,8]
 print(Y)
+
+#划分训练集和测试
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.3)
 model=linear_model.LinearRegression();
 model.fit(X_train,Y_train)
@@ -37,10 +41,11 @@ float_Y_predict = Y_predict.astype(np.float32)
 print(float_Y_test)
 print(float_Y_predict)
 
+#求均方误差
 print("MSE of train: %.2f, test, %.2f" % (
     mean_squared_error(float_Y_train,float_Y_train_pred),
     mean_squared_error(float_Y_test,float_Y_predict)))
-
+#求R2
 print("R^2 of train: %.2f, test, %.2f" % (
     r2_score(float_Y_train,float_Y_train_pred),
     r2_score(float_Y_test,float_Y_predict)))
